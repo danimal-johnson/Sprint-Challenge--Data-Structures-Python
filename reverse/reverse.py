@@ -54,12 +54,25 @@ class LinkedList:
             return
 
         if node.get_next() == None:
-            print("End of list at ", node.get_value())
-            print("Moving head")
+            # Boundary condition: end of list
+            # Point the head to here and return
             self.head = node
             return
 
+        # Recursive call to sort list from next node
+        self.reverse_list(node.get_next(), None)
+
         # On the way back out of the recursion.
-        # Reverse the pointers
-        node.next_node.set_next(node.get_next())
+        # (Reverse the pointers.)
+        # Set the next node's next_node to this node
+        node.next_node.set_next(node)
+        # Now set this node's pointer to null
         node.set_next(None)
+
+# For testing:
+# back = LinkedList()
+# back.add_to_head(1)
+# back.add_to_head(2)
+# back.add_to_head(3)
+# back.add_to_head(4)
+# back.add_to_head(5)
